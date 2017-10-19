@@ -1,0 +1,11 @@
+{
+  "extends": "standard",
+    "env": {
+      "node": true,
+      "mocha": true
+    },
+  "globals": {
+    "expect": false,
+    "assert": false
+  }
+}
