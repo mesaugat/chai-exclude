@@ -2,7 +2,7 @@
   "name": "chai-exclude",
   "version": "1.0.0",
   "description": "Exclude properties before deep equal",
-  "main": "lib/index.js",
+  "main": "lib/chai-exclude.js",
   "author": "Saugat Acharya <mesaugat@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/bustlelabs/chai-exclude",
