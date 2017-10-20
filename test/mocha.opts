@@ -1,0 +1,4 @@
+--require ./test/init.js
+--reporter spec
+--recursive
+--colors

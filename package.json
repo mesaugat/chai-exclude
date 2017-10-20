@@ -6,6 +6,10 @@
   "author": "Saugat Acharya <mesaugat@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/bustlelabs/chai-exclude",
+  "scripts": {
+    "test": "mocha",
+    "lint": "eslint lib test --fix"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mesaugat/chai-exclude"
@@ -20,6 +24,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^4.0.1"
   }
 }
