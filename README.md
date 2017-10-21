@@ -1,5 +1,6 @@
 # chai-exclude
 
+[![npm](https://img.shields.io/npm/v/chai-exclude.svg)](https://www.npmjs.com/package/chai-exclude)
 [![Build Status](https://travis-ci.org/mesaugat/chai-exclude.svg?branch=master)](https://travis-ci.org/mesaugat/chai-exclude)
 
 Exclude keys before a deep equal operation with [expect](http://chaijs.com/api/bdd/).
