@@ -1,0 +1,10 @@
+# Config
+.eslintrc
+.travis.yml
+
+# Directory
+test/
+coverage/
+
+# Yarn lock
+yarn.lock
