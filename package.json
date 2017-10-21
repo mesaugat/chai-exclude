@@ -25,6 +25,7 @@
     "url": "https://github.com/mesaugat/chai-exclude/issues"
   },
   "devDependencies": {
+    "@types/chai": "^4.0.4",
     "chai": "^4.1.2",
     "eslint": "^4.9.0",
     "eslint-config-standard": "^10.2.1",
