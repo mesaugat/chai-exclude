@@ -1,15 +1,22 @@
 {
   "name": "chai-exclude",
   "version": "1.0.0",
-  "description": "Exclude properties before deep equal",
+  "description": "Exclude keys before a deep equal operation with expect",
   "main": "lib/chai-exclude.js",
   "author": "Saugat Acharya <mesaugat@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/bustlelabs/chai-exclude",
+  "homepage": "https://github.com/mesaugat/chai-exclude",
   "scripts": {
     "test": "mocha",
     "lint": "eslint lib test --fix"
   },
+  "keywords": [
+    "chai",
+    "expect",
+    "exclude",
+    "chai-plugin",
+    "chai-exclude"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mesaugat/chai-exclude"
