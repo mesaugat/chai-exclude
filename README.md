@@ -1,9 +1,11 @@
 # chai-exclude
 
 [![npm](https://img.shields.io/npm/v/chai-exclude.svg)](https://www.npmjs.com/package/chai-exclude)
+[![npm](https://img.shields.io/npm/dt/chai-exclude.svg)](https://www.npmjs.com/package/chai-exclude)
 [![Build Status](https://travis-ci.org/mesaugat/chai-exclude.svg?branch=master)](https://travis-ci.org/mesaugat/chai-exclude)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-Exclude keys before a deep equal operation with [expect](http://chaijs.com/api/bdd/).
+Exclude keys before a deep equal operation with chaijs [expect](http://chaijs.com/api/bdd/).
 
 ## Why?
 
