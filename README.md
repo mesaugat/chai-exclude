@@ -32,17 +32,106 @@ chai.use(chaiExclude);
 
 ## Example
 
-1. Excluding a property from the object
+### a) excluding
+
+1. Excluding a property from an object
 
 ```js
-expect({ a: 'a', b: 'b' }).excluding('a').to.equal({ b: 'b' });
+expect({ a: 'a', b: 'b' }).excluding('a').to.deep.equal({ b: 'b' })
 ```
 
-2. Excluding multiple properties from the object
+2. Excluding multiple top level properties from an object
 
 ```js
-expect({ a: 'a', b: 'b', c: 'c' }).excluding(['a', 'b']).to.equal({ c: 'c' });
+const obj = {
+  a: 'a',
+  b: 'b',
+  c: {
+    d: 'd',
+    e: 'e'
+  }
+}
+
+expect(obj).excluding(['a', 'c']).to.deep.equal({ b: 'b' })
 ```
+
+### b) excludingEvery
+
+1. Excluding every property in a deeply nested object
+
+```js
+const actual = {
+  a: 'a',
+  b: 'b',
+  c: {
+    a: 'a',
+    b: {
+      a: 'a',
+      d: {
+        a: 'a',
+        b: 'b',
+        d: null
+      }
+    }
+  },
+  d: ['a', 'c']
+}
+
+const expected = {
+  b: 'b',
+  c: {
+    b: {
+      d: {
+        b: 'b',
+        d: null
+      }
+    }
+  },
+  d: ['a', 'c']
+}
+
+expect(actual).excludingEvery('a').to.deep.equal(expected)
+```
+
+2. Excluding multiple properties in a deeply nested object
+
+```js
+const actual = {
+  a: 'a',
+  b: 'b',
+  c: {
+    a: 'a',
+    b: {
+      a: 'a',
+      d: {
+        a: 'a',
+        b: 'b',
+        d: null
+      }
+    }
+  },
+  d: ['a', 'c']
+}
+
+const expected = {
+  b: 'b',
+  c: {
+    b: {
+      d: {      // d is not removed because it is an object
+        b: 'b'
+      }
+    }
+  }
+}
+
+expect(actual).excludingEvery(['a', 'd']).to.deep.equal(expected)
+```
+
+__Note: `excludingEvery` will not remove the property if it is an object in a deeply nested object.__
+
+## Contributing
+
+Contributions are welcome. If you have any questions create an issue [here](https://github.com/mesaugat/chai-exclude/issues).
 
 ## License
 
