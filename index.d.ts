@@ -4,6 +4,7 @@ declare global {
     namespace Chai {
         interface Assertion {
             excluding(props: string|string[]): Assertion;
+            excludingEvery(props: string|string[]): Assertion;
         }
     }
 }
