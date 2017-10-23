@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Exclude keys before a deep equal operation with expect",
   "main": "lib/chai-exclude.js",
+  "types": "lib/chai-exclude.d.ts",
   "author": "Saugat Acharya <mesaugat@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/mesaugat/chai-exclude",
