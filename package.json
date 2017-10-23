@@ -1,6 +1,6 @@
 {
   "name": "chai-exclude",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Exclude keys before a deep equal operation with expect",
   "main": "lib/chai-exclude.js",
   "types": "lib/chai-exclude.d.ts",
