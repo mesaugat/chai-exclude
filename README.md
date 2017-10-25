@@ -25,11 +25,33 @@ yarn add chai-exclude --dev
 
 ## Usage
 
+#### Require
+
 ```js
 const chai = require('chai');
 const chaiExclude = require('chai-exclude');
 
 chai.use(chaiExclude);
+```
+
+#### ES6 Import
+
+```js
+import { use } from 'chai';
+import chaiExclude from 'chai-exclude';
+
+use(chaiExclude);
+```
+
+#### TypeScript
+
+```js
+import { use } from 'chai';
+import chaiExclude = require('chai-exclude');
+
+use(chaiExclude);
+
+// The typings for chai-exclude are included with the package itself.
 ```
 
 ## Example
