@@ -61,7 +61,7 @@ use(chaiExclude);
 1. Excluding a property from an object
 
 ```js
-expect({ a: 'a', b: 'b' }).excluding('a').to.deep.equal({ b: 'b' })
+expect({ a: 'a', b: 'b' }).excluding('a').to.deep.equal({ a: 'z', b: 'b' })
 ```
 
 2. Excluding multiple top level properties from an object

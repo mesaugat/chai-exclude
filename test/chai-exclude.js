@@ -5,8 +5,17 @@ describe('chaiExclude', () => {
     expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.equal({ b: 'b', c: 'c' })
   })
 
+  it('should also exclude a key from the other object', () => {
+    expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.equal({ a: 'z', b: 'b', c: 'c' })
+  })
+
   it('should exclude an array of keys from the object', () => {
     expect({ a: 'a', b: 'b', c: 'c' }).excluding(['a', 'c']).to.deep.equal({ b: 'b' })
+  })
+
+  it('should also exclude an array of keys from the other object', () => {
+    expect({ a: 'a', b: 'b', c: 'c' }).excluding(['a', 'c']).to.deep.equal({ a: 'z', b: 'b' })
+    expect({ a: 'a', b: 'b', c: 'c' }).excluding(['a', 'c']).to.deep.equal({ a: 'z', b: 'b', c: 'c' })
   })
 
   it('should exclude nothing from the object if no keys are provided', () => {
@@ -61,6 +70,7 @@ describe('chaiExcludeEvery', () => {
       c: {
         b: {
           d: {
+            a: 'z',
             b: 'b',
             d: null
           }
