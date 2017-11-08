@@ -73,6 +73,7 @@ describe('chai-exclude', () => { // eslint-disable-line
 
     it('should exclude a key from multiple levels of a given object', () => {
       const expectedObj = {
+        a: 'z',
         b: 'b',
         c: {
           b: {
