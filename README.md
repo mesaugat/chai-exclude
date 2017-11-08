@@ -5,11 +5,11 @@
 [![Build Status](https://travis-ci.org/mesaugat/chai-exclude.svg?branch=master)](https://travis-ci.org/mesaugat/chai-exclude)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-Exclude keys before a deep equal operation with chaijs [expect](http://chaijs.com/api/bdd/).
+Exclude keys to compare from a deep equal operation with chaijs [expect](http://chaijs.com/api/bdd/).
 
 ## Why?
 
-Sometimes you'll need to exclude object properties that generate unique values while doing a deep equal comparison. This plugin makes it easier to remove those top level properties before comparison.
+Sometimes you'll need to exclude object properties that generate unique values while doing a deep equal operation. This plugin makes it easier to remove those properties before comparison.
 
 https://github.com/chaijs/chai/issues/885
 
@@ -58,9 +58,10 @@ use(chaiExclude);
 
 ### a) excluding
 
-1. Excluding a property from an object
+1. Excluding a top level property from an object
 
 ```js
+expect({ a: 'a', b: 'b' }).excluding('a').to.deep.equal({ b: 'b' })
 expect({ a: 'a', b: 'b' }).excluding('a').to.deep.equal({ a: 'z', b: 'b' })
 ```
 
@@ -77,6 +78,7 @@ const obj = {
 }
 
 expect(obj).excluding(['a', 'c']).to.deep.equal({ b: 'b' })
+expect(obj).excluding(['a', 'c']).to.deep.equal({ a:'z', b: 'b' })
 ```
 
 ### b) excludingEvery
@@ -102,6 +104,7 @@ const actual = {
 }
 
 const expected = {
+  a: 'z',     // a is excluded from comparison
   b: 'b',
   c: {
     b: {
