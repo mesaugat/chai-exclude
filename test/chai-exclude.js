@@ -53,7 +53,7 @@ describe('chai-exclude', () => { // eslint-disable-line
   })
 
   describe('excludingEvery', () => {
-    // Initial object that we will remove properties from across all tests
+    // Initial object that we will remove properties from
     const initialObj = {
       a: 'a',
       b: 'b',
@@ -72,6 +72,8 @@ describe('chai-exclude', () => { // eslint-disable-line
     }
 
     it('should exclude a key from multiple levels of a given object', () => {
+      // Expected object can still have the properties that are excluded, it
+      // will be removed from comparison
       const expectedObj = {
         a: 'z',
         b: 'b',
@@ -94,14 +96,7 @@ describe('chai-exclude', () => { // eslint-disable-line
       const expectedObj = {
         a: 'a',
         c: {
-          a: 'a',
-          b: {
-            a: 'a',
-            d: {
-              a: 'a',
-              d: null
-            }
-          }
+          a: 'a'
         },
         d: ['a', 'c']
       }
@@ -113,17 +108,6 @@ describe('chai-exclude', () => { // eslint-disable-line
       const expectedObj = {
         a: 'a',
         b: 'b',
-        c: {
-          a: 'a',
-          b: {
-            a: 'a',
-            d: {
-              a: 'a',
-              b: 'b',
-              d: null
-            }
-          }
-        },
         d: ['a', 'c']
       }
 
@@ -137,11 +121,7 @@ describe('chai-exclude', () => { // eslint-disable-line
         c: {
           a: 'a',
           b: {
-            a: 'a',
-            d: {
-              a: 'a',
-              b: 'b'
-            }
+            a: 'a'
           }
         }
       }
@@ -150,16 +130,77 @@ describe('chai-exclude', () => { // eslint-disable-line
     })
 
     it('should exclude an array of keys from multiple levels of a given object', () => {
+      const expectedObj = {}
+
+      expect(initialObj).excludingEvery(['a', 'b', 'c', 'd']).to.deep.equal(expectedObj)
+    })
+
+    it('should exclude keys from objects inside of arrays', () => {
+      const obj = {
+        ...initialObj,
+        e: [
+          {
+            a: 'a',
+            b: {
+              a: 'a',
+              d: {
+                a: 'a',
+                b: 'b',
+                d: null
+              }
+            }
+          },
+          null,
+          1,
+          'string',
+          [
+            {
+              a: 'a',
+              b: {
+                a: 'a',
+                c: null,
+                d: 'd'
+              }
+            }
+          ]
+        ]
+      }
+
       const expectedObj = {
+        b: 'b',
         c: {
           b: {
             d: {
+              b: 'b',
+              d: null
             }
           }
-        }
+        },
+        d: ['a', 'c'],
+        e: [
+          {
+            b: {
+              d: {
+                b: 'b',
+                d: null
+              }
+            }
+          },
+          null,
+          1,
+          'string',
+          [
+            {
+              b: {
+                c: null,
+                d: 'd'
+              }
+            }
+          ]
+        ]
       }
 
-      expect(initialObj).excludingEvery(['a', 'b', 'c', 'd']).to.deep.equal(expectedObj)
+      expect(obj).excludingEvery('a').to.deep.equal(expectedObj)
     })
 
     it('should exclude nothing from the object if no keys are provided', () => {
