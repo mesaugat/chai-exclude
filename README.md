@@ -144,17 +144,11 @@ const expected = {
   b: 'b',
   c: {
     b: {
-      d: {      // d is not removed because it is an object
-        b: 'b'
-      }
     }
   }
-}
 
 expect(actual).excludingEvery(['a', 'd']).to.deep.equal(expected)
 ```
-
-__Note: `excludingEvery` will not remove the property if it is an object in a deeply nested object.__
 
 ## Contributing
 
