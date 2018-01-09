@@ -137,7 +137,20 @@ describe('chai-exclude', () => { // eslint-disable-line
 
     it('should exclude keys from objects inside of arrays', () => {
       const obj = {
-        ...initialObj,
+        a: 'a',
+        b: 'b',
+        c: {
+          a: 'a',
+          b: {
+            a: 'a',
+            d: {
+              a: 'a',
+              b: 'b',
+              d: null
+            }
+          }
+        },
+        d: ['a', 'c'],
         e: [
           {
             a: 'a',
