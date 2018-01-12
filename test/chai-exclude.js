@@ -216,6 +216,59 @@ describe('chai-exclude', () => { // eslint-disable-line
       expect(obj).excludingEvery('a').to.deep.equal(expectedObj)
     })
 
+    it('should exclude keys from objects inside of array at the root', () => {
+      const obj = [
+        {
+          a: 'a',
+          b: {
+            a: 'a',
+            d: {
+              a: 'a',
+              b: 'b',
+              d: null
+            }
+          }
+        },
+        null,
+        1,
+        'string',
+        [
+          {
+            a: 'a',
+            b: {
+              a: 'a',
+              c: null,
+              d: 'd'
+            }
+          }
+        ]
+      ]
+
+      const expectedObj = [
+        {
+          b: {
+            d: {
+              b: 'b',
+              d: null
+            }
+          }
+        },
+        null,
+        1,
+        'string',
+        [
+          {
+            b: {
+              c: null,
+              d: 'd'
+            }
+          }
+        ]
+      ]
+
+      expect(obj).excludingEvery('a').to.deep.equal(expectedObj)
+    })
+
     it('should exclude nothing from the object if no keys are provided', () => {
       expect(initialObj).excludingEvery().to.deep.equal(initialObj)
     })
