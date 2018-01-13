@@ -14,6 +14,8 @@ Sometimes you'll need to exclude object properties that generate unique values w
 
 https://github.com/chaijs/chai/issues/885
 
+Works with both array of objects and objects.
+
 ## Installation
 
 ```bash
@@ -62,8 +64,13 @@ use(chaiExclude);
 1. Excluding a top level property from an object
 
 ```js
+// Object
 expect({ a: 'a', b: 'b' }).excluding('a').to.deep.equal({ b: 'b' })
 expect({ a: 'a', b: 'b' }).excluding('a').to.deep.equal({ a: 'z', b: 'b' })
+
+// Array
+expect([{ a: 'a', b: 'b' }]).excluding('a').to.deep.equal([{ b: 'b' }])
+expect([{ a: 'a', b: 'b' }]).excluding('a').to.deep.equal([{ a: 'z', b: 'b' }])
 ```
 
 2. Excluding multiple top level properties from an object
@@ -78,8 +85,24 @@ const obj = {
   }
 }
 
+// Object
 expect(obj).excluding(['a', 'c']).to.deep.equal({ b: 'b' })
 expect(obj).excluding(['a', 'c']).to.deep.equal({ a:'z', b: 'b' })
+
+const array = [
+  {
+    a: 'a',
+    b: 'b',
+    c: {
+      d: 'd',
+      e: 'e'
+    }
+  }
+]
+
+// Array
+expect(array).excluding(['a', 'c']).to.deep.equal([{ b: 'b' }])
+expect(array).excluding(['a', 'c']).to.deep.equal([{ a: 'z', b: 'b' }])
 ```
 
 ### b) excludingEvery
@@ -87,7 +110,7 @@ expect(obj).excluding(['a', 'c']).to.deep.equal({ a:'z', b: 'b' })
 1. Excluding every property in a deeply nested object
 
 ```js
-const actual = {
+const actualObj = {
   a: 'a',
   b: 'b',
   c: {
@@ -104,7 +127,9 @@ const actual = {
   d: ['a', 'c']
 }
 
-const expected = {
+const actualArray = [actualObj]
+
+const expectedObj = {
   a: 'z',     // a is excluded from comparison
   b: 'b',
   c: {
@@ -118,13 +143,19 @@ const expected = {
   d: ['a', 'c']
 }
 
-expect(actual).excludingEvery('a').to.deep.equal(expected)
+const expectedObj = [expectedObj]
+
+// Object
+expect(actualObj).excludingEvery('a').to.deep.equal(expectedObj)
+
+// Array
+expect(actualArray).excludingEvery('a').to.deep.equal(expectedArray)
 ```
 
 2. Excluding multiple properties in a deeply nested object
 
 ```js
-const actual = {
+const actualObj = {
   a: 'a',
   b: 'b',
   c: {
@@ -141,14 +172,23 @@ const actual = {
   d: ['a', 'c']
 }
 
-const expected = {
+const actualArray = [actualObj]
+
+const expectedObj = {
   b: 'b',
   c: {
     b: {
     }
   }
+}
 
-expect(actual).excludingEvery(['a', 'd']).to.deep.equal(expected)
+const expectedArray = [expectedObj]
+
+// Object
+expect(actualObj).excludingEvery(['a', 'd']).to.deep.equal(expectedObj)
+
+// Array
+expect(actualArray).excludingEvery(['a', 'd']).to.deep.equal(expectedArray)
 ```
 
 ## Contributing
