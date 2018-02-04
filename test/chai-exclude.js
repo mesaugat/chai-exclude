@@ -1,8 +1,120 @@
 const expect = require('chai').expect
+const assert = require('chai').assert
 
-describe('chai-exclude', () => { // eslint-disable-line
+describe('chai-exclude', () => {
+  /**
+   * Uses the same 'excluding' Assertion API underneath, thus the fewer amount of tests.
+   */
+  describe('assert.deepEqualExcluding', () => {
+    it('should exclude key(s) from comparison', () => {
+      assert.deepEqualExcluding({ a: 'a', b: 'b', c: 'c' }, { b: 'b', c: 'c' }, 'a')
+      assert.deepEqualExcluding({ a: 'a', b: 'b', c: 'c' }, { c: 'c' }, ['a', 'b'])
+      assert.deepEqualExcluding([{ a: 'a', b: 'b', c: 'c' }], [{ c: 'c' }], ['a', 'b'])
+    })
+  })
 
-  describe('excluding', () => {
+  /**
+   * Uses the same 'excludingEvery' Assertion API underneath, thus the fewer amount of tests.
+   */
+  describe('assert.deepEqualExcludingEvery', () => {
+    it('should exclude key(s) from comparison', () => {
+      const initialObj = {
+        a: 'a',
+        b: 'b',
+        c: {
+          a: 'a',
+          b: {
+            a: 'a',
+            d: {
+              a: 'a',
+              b: 'b',
+              d: null
+            }
+          }
+        },
+        d: ['a', 'c'],
+        e: [
+          {
+            a: 'a',
+            b: {
+              a: 'a',
+              d: {
+                a: 'a',
+                b: 'b',
+                d: null
+              }
+            }
+          },
+          null,
+          1,
+          'string',
+          [
+            {
+              a: 'a',
+              b: {
+                a: 'a',
+                c: null,
+                d: 'd'
+              }
+            }
+          ]
+        ]
+      }
+
+      const expectedObj1 = {
+        b: 'b',
+        c: {
+          b: {
+            d: {
+              b: 'b',
+              d: null
+            }
+          }
+        },
+        d: ['a', 'c'],
+        e: [
+          {
+            b: {
+              d: {
+                b: 'b',
+                d: null
+              }
+            }
+          },
+          null,
+          1,
+          'string',
+          [
+            {
+              b: {
+                c: null,
+                d: 'd'
+              }
+            }
+          ]
+        ]
+      }
+
+      const expectedObj2 = {
+        c: {},
+        d: ['a', 'c'],
+        e: [
+          {},
+          null,
+          1,
+          'string',
+          [
+            {}
+          ]
+        ]
+      }
+
+      assert.deepEqualExcludingEvery(initialObj, expectedObj1, 'a')
+      assert.deepEqualExcludingEvery(initialObj, expectedObj2, ['a', 'b'])
+    })
+  })
+
+  describe('expect.excluding', () => {
     it('should exclude a key from the object', () => {
       expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.equal({ b: 'b', c: 'c' })
     })
@@ -30,7 +142,7 @@ describe('chai-exclude', () => { // eslint-disable-line
     })
 
     it('should exclude top level key even if it is an object', () => {
-      const obj = {
+      const initialObj = {
         a: 'a',
         b: 'b',
         c: {
@@ -48,7 +160,7 @@ describe('chai-exclude', () => { // eslint-disable-line
         d: ['a', 'c']
       }
 
-      expect(obj).excluding('c').to.deep.equal(expectedObj)
+      expect(initialObj).excluding('c').to.deep.equal(expectedObj)
     })
 
     it('should exclude top level key(s) from array of objects', () => {
@@ -82,10 +194,9 @@ describe('chai-exclude', () => { // eslint-disable-line
 
       expect(initialArray).excluding('c').to.deep.equal(expectedArray)
     })
+  })
 
-}) // eslint-disable-line
-
-  describe('excludingEvery', () => {
+  describe('expect.excludingEvery', () => {
     // Initial object that we will remove properties from
     const initialObj = {
       a: 'a',
@@ -358,5 +469,4 @@ describe('chai-exclude', () => { // eslint-disable-line
       expect(initialObj).excludingEvery(['x', 'y']).to.deep.equal(initialObj)
     })
   })
-
-})  // eslint-disable-line
+})
