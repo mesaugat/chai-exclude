@@ -6,7 +6,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/18c8dd78120442688cb4b19f758c4b96)](https://www.codacy.com/app/mesaugat/chai-exclude?utm_source=github.com&utm_medium=referral&utm_content=mesaugat/chai-exclude&utm_campaign=badger)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-Exclude keys to compare from a deep equal operation with chaijs [expect](http://chaijs.com/api/bdd/).
+Exclude keys to compare from a deep equal operation with chai [expect](http://chaijs.com/api/bdd/) or [assert](http://chaijs.com/api/assert/).
 
 ## Why?
 
@@ -28,7 +28,7 @@ yarn add chai-exclude --dev
 
 ## Usage
 
-#### Require
+### Require
 
 ```js
 const chai = require('chai');
@@ -37,7 +37,7 @@ const chaiExclude = require('chai-exclude');
 chai.use(chaiExclude);
 ```
 
-#### ES6 Import
+### ES6 Import
 
 ```js
 import { use } from 'chai';
@@ -46,7 +46,7 @@ import chaiExclude from 'chai-exclude';
 use(chaiExclude);
 ```
 
-#### TypeScript
+### TypeScript
 
 ```js
 import { use } from 'chai';
@@ -65,10 +65,16 @@ use(chaiExclude);
 
 ```js
 // Object
+assert.deepEqualExcluding({ a: 'a', b: 'b' }, { b: 'b' }, 'a')
+assert.deepEqualExcluding({ a: 'a', b: 'b' }, { a: 'z', b: 'b' }, 'a')
+
 expect({ a: 'a', b: 'b' }).excluding('a').to.deep.equal({ b: 'b' })
 expect({ a: 'a', b: 'b' }).excluding('a').to.deep.equal({ a: 'z', b: 'b' })
 
 // Array
+assert.deepEqualExcluding([{ a: 'a', b: 'b' }], [{ b: 'b' }], 'a')
+assert.deepEqualExcluding([{ a: 'a', b: 'b' }], [{ a: 'z', b: 'b' }], 'a')
+
 expect([{ a: 'a', b: 'b' }]).excluding('a').to.deep.equal([{ b: 'b' }])
 expect([{ a: 'a', b: 'b' }]).excluding('a').to.deep.equal([{ a: 'z', b: 'b' }])
 ```
@@ -86,8 +92,11 @@ const obj = {
 }
 
 // Object
+assert.deepEqualExcluding(obj, { b: 'b' }, ['a', 'c'])
+assert.deepEqualExcluding(obj, { a: 'z', b: 'b' }, ['a', 'c'])
+
 expect(obj).excluding(['a', 'c']).to.deep.equal({ b: 'b' })
-expect(obj).excluding(['a', 'c']).to.deep.equal({ a:'z', b: 'b' })
+expect(obj).excluding(['a', 'c']).to.deep.equal({ a: 'z', b: 'b' })
 
 const array = [
   {
@@ -101,6 +110,9 @@ const array = [
 ]
 
 // Array
+assert.deepEqualExcluding(array, [{ b: 'b' }], ['a', 'c'])
+assert.deepEqualExcluding(array, [{ a: 'z', b: 'b' }], ['a', 'c'])
+
 expect(array).excluding(['a', 'c']).to.deep.equal([{ b: 'b' }])
 expect(array).excluding(['a', 'c']).to.deep.equal([{ a: 'z', b: 'b' }])
 ```
@@ -146,9 +158,11 @@ const expectedObj = {
 const expectedObj = [expectedObj]
 
 // Object
+assert.deepEqualExcludingEvery(actualObj, expectedObj, 'a')
 expect(actualObj).excludingEvery('a').to.deep.equal(expectedObj)
 
 // Array
+assert.deepEqualExcludingEvery(actualArray, expectedArray, 'a')
 expect(actualArray).excludingEvery('a').to.deep.equal(expectedArray)
 ```
 
@@ -185,9 +199,11 @@ const expectedObj = {
 const expectedArray = [expectedObj]
 
 // Object
+assert.deepEqualExcludingEvery(actualObj, expectedObj, ['a', 'd'])
 expect(actualObj).excludingEvery(['a', 'd']).to.deep.equal(expectedObj)
 
 // Array
+assert.deepEqualExcludingEvery(actualArray, expectedArray, ['a', 'd'])
 expect(actualArray).excludingEvery(['a', 'd']).to.deep.equal(expectedArray)
 ```
 
