@@ -206,13 +206,13 @@ describe('chai-exclude', () => {
       }
 
       // Create circular references.
-      initialObj.e = initialObj;
-      expectedObj1.e = expectedObj1;
-      expectedObj2.e = expectedObj2;
+      initialObj.e = initialObj
+      expectedObj1.e = expectedObj1
+      expectedObj2.e = expectedObj2
 
-      initialObj.c.e = initialObj;
-      expectedObj1.c.e = expectedObj1;
-      expectedObj2.c.e = expectedObj2;
+      initialObj.c.e = initialObj
+      expectedObj1.c.e = expectedObj1
+      expectedObj2.c.e = expectedObj2
 
       assert.deepEqualExcludingEvery(initialObj, expectedObj1, 'a')
       assert.deepEqualExcludingEvery(initialObj, expectedObj2, ['a', 'b'])
