@@ -112,6 +112,111 @@ describe('chai-exclude', () => {
       assert.deepEqualExcludingEvery(initialObj, expectedObj1, 'a')
       assert.deepEqualExcludingEvery(initialObj, expectedObj2, ['a', 'b'])
     })
+
+    it('should exclude key(s) in case of circular reference from comparison', () => {
+      const initialObj = {
+        a: 'a',
+        b: 'b',
+        c: {
+          a: 'a',
+          b: {
+            a: 'a',
+            d: {
+              a: 'a',
+              b: 'b',
+              d: null
+            }
+          }
+        },
+        d: ['a', 'c'],
+        e: [
+          {
+            a: 'a',
+            b: {
+              a: 'a',
+              d: {
+                a: 'a',
+                b: 'b',
+                d: null
+              }
+            }
+          },
+          null,
+          1,
+          'string',
+          [
+            {
+              a: 'a',
+              b: {
+                a: 'a',
+                c: null,
+                d: 'd'
+              }
+            }
+          ]
+        ]
+      }
+
+      const expectedObj1 = {
+        b: 'b',
+        c: {
+          b: {
+            d: {
+              b: 'b',
+              d: null
+            }
+          }
+        },
+        d: ['a', 'c'],
+        e: [
+          {
+            b: {
+              d: {
+                b: 'b',
+                d: null
+              }
+            }
+          },
+          null,
+          1,
+          'string',
+          [
+            {
+              b: {
+                c: null,
+                d: 'd'
+              }
+            }
+          ]
+        ]
+      }
+
+      const expectedObj2 = {
+        c: {},
+        d: ['a', 'c'],
+        e: [
+          {},
+          null,
+          1,
+          'string',
+          [
+            {}
+          ]
+        ]
+      }
+
+      // Create circular references.
+      initialObj.e = initialObj;
+      expectedObj1.e = expectedObj1;
+      expectedObj2.e = expectedObj2;
+
+      initialObj.c.e = initialObj;
+      expectedObj1.c.e = expectedObj1;
+      expectedObj2.c.e = expectedObj2;
+
+      assert.deepEqualExcludingEvery(initialObj, expectedObj1, 'a')
+      assert.deepEqualExcludingEvery(initialObj, expectedObj2, ['a', 'b'])
+    })
   })
 
   describe('expect.excluding', () => {
