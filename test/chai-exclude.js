@@ -224,25 +224,6 @@ describe('chai-exclude', () => {
       expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.equal({ b: 'b', c: 'c' })
     })
 
-    it('should exclude a key from the object with circular key(s)', () => {
-      const initialObj = {
-        a: 'a',
-        b: 'b',
-        d: ['a', 'c']
-      }
-
-      const expectedObj1 = {
-        b: 'b',
-        d: ['a', 'c']
-      }
-
-      // Create circular references.
-      initialObj.e = initialObj
-      expectedObj1.e = expectedObj1
-
-      expect(initialObj).excluding('a').to.deep.equal(expectedObj1)
-    })
-
     it('should also exclude a key from the other object', () => {
       expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.equal({ a: 'z', b: 'b', c: 'c' })
     })
@@ -317,6 +298,25 @@ describe('chai-exclude', () => {
       ]
 
       expect(initialArray).excluding('c').to.deep.equal(expectedArray)
+    })
+
+    it('should exclude a key from the object with circular key(s)', () => {
+      const initialObj = {
+        a: 'a',
+        b: 'b',
+        d: ['a', 'c']
+      }
+
+      const expectedObj = {
+        b: 'b',
+        d: ['a', 'c']
+      }
+
+      // Create circular references
+      initialObj.e = initialObj
+      expectedObj.e = expectedObj
+
+      expect(initialObj).excluding('a').to.deep.equal(expectedObj)
     })
   })
 
@@ -582,6 +582,28 @@ describe('chai-exclude', () => {
 
       expect(initialArray).excludingEvery('a').to.deep.equal(expectedArray1)
       expect(initialArray).excludingEvery(['a', 'd']).to.deep.equal(expectedArray2)
+    })
+
+    it('should exclude keys from the object with circular reference', () => {
+      const initialObj = {
+        a: 'a',
+        b: 'b',
+        d: ['a', 'c']
+      }
+
+      const expectedObj = {
+        b: 'b',
+        d: ['a', 'c']
+      }
+
+      // Create circular references
+      initialObj.e = initialObj
+      initialObj.d.push(initialObj)
+
+      expectedObj.e = expectedObj
+      expectedObj.d.push(expectedObj)
+
+      expect(initialObj).excludingEvery('a').to.deep.equal(expectedObj)
     })
 
     it('should exclude nothing from the object if no keys are provided', () => {
