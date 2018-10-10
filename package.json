@@ -36,5 +36,8 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
     "mocha": "^5.0.0"
+  },
+  "dependencies": {
+    "fclone": "^1.0.11"
   }
 }
