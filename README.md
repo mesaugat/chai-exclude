@@ -14,7 +14,7 @@ Sometimes you'll need to exclude object properties that generate unique values w
 
 https://github.com/chaijs/chai/issues/885
 
-Works with both array of objects and objects.
+Works with both objects and array of objects with or without circular references.
 
 ## Installation
 
