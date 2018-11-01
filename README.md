@@ -19,7 +19,7 @@ Works with both objects and array of objects with or without circular references
 ## Installation
 
 ```bash
-npm install chai-exclude --only=dev
+npm install chai-exclude --save-dev
 ```
 
 ```bash
