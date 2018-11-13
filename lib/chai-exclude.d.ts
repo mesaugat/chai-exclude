@@ -16,7 +16,6 @@ declare namespace Chai {
     /**
       * Asserts that actual is deeply equal to expected excluding some top level properties.
       *
-      * @type T          Type of the objects.
       * @param actual    Actual value.
       * @param expected  Potential expected value.
       * @param props     Properties or keys to exclude.
@@ -27,7 +26,6 @@ declare namespace Chai {
     /**
      * Asserts that actual is deeply equal to expected excluding properties any level deep.
      *
-     * @type T          Type of the objects.
      * @param actual    Actual value.
      * @param expected  Potential expected value.
      * @param props     Properties or keys to exclude.
