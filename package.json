@@ -36,7 +36,6 @@
     "fclone": "^1.0.11"
   },
   "peerDependencies": {
-    "@types/chai": ">= 4.0.0 < 5",
     "chai": ">= 4.0.0 < 5"
   }
 }
