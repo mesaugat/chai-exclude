@@ -57,7 +57,9 @@ use(chaiExclude);
 // The typings for chai-exclude are included with the package itself.
 ```
 
-## Example
+## Examples
+
+All these examples are for JavaScript. If you are using TypeScript and `assert` you'll need to deal with stricter types. Take a look at the [type definition](lib/chai-exclude.d.ts).
 
 ### a) excluding
 
