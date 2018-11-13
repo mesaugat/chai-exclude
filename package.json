@@ -7,6 +7,9 @@
   "author": "Saugat Acharya <mesaugat@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/mesaugat/chai-exclude",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "mocha",
     "lint": "standard --fix"
