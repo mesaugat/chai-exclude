@@ -14,7 +14,7 @@ declare namespace Chai {
 
   interface Assert {
     /**
-     * Asserts that actual is deeply equal to expected excluding some top level properties.
+     * Deep equal objects excluding some top level properties.
      *
      * @param actual    Actual value.
      * @param expected  Potential expected value.
@@ -24,17 +24,17 @@ declare namespace Chai {
     deepEqualExcluding<T>(actual: T, expected: T, props: keyof T | (keyof T)[], message?: string): void;
 
     /**
-     * Asserts that actual array is deeply equal to expected array excluding some top level properties.
+     * Deep equal array of objects excluding some top level properties.
      *
-     * @param actual    Any object or array.
-     * @param expected  Expected object or array.
+     * @param actual    Array of objects.
+     * @param expected  Expected array of objects.
      * @param props     String or string of arrays to exclude.
      * @param message   Message to display on error.
      */
     deepEqualExcluding<T>(actual: T[], expected: T[], props: string | string[], message?: string): void;
 
     /**
-     * Asserts that actual is deeply equal to expected excluding properties any level deep.
+     * Deep equal objects excluding properties any level deep.
      *
      * @param actual    Actual value.
      * @param expected  Potential expected value.
@@ -44,10 +44,10 @@ declare namespace Chai {
     deepEqualExcludingEvery<T>(actual: T, expected: T, props: keyof T | (keyof T)[], message?: string): void;
 
     /**
-     * Asserts that actual array is deeply equal to expected array excluding properties any level deep.
+     * Deep equal array of objects excluding properties any level deep.
      *
-     * @param actual    Any array.
-     * @param expected  Expected array.
+     * @param actual    Array of objects.
+     * @param expected  Expected array of objects.
      * @param props     String or string of arrays to exclude.
      * @param message   Message to display on error.
      */
