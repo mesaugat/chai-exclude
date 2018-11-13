@@ -7,7 +7,7 @@ declare module "chai-exclude" {
 }
 
 declare namespace Chai {
-  interface Assertion {
+  interface Assertion extends LanguageChains, NumericComparison, TypeComparison {
     excluding(props: string | string[]): Assertion;
     excludingEvery(props: string | string[]): Assertion;
   }
@@ -16,23 +16,41 @@ declare namespace Chai {
     /**
      * Asserts that actual is deeply equal to expected excluding some top level properties.
      *
-     * @type T          Type of the objects.
      * @param actual    Actual value.
      * @param expected  Potential expected value.
      * @param props     Properties or keys to exclude.
      * @param message   Message to display on error.
      */
-    deepEqualExcluding<T>(actual: T, expected: T, props: keyof T | keyof T[], message?: string): void;
+    deepEqualExcluding<T>(actual: T, expected: T, props: keyof T | (keyof T)[], message?: string): void;
+
+    /**
+     * Asserts that actual array is deeply equal to expected array excluding some top level properties.
+     *
+     * @param actual    Any object or array.
+     * @param expected  Expected object or array.
+     * @param props     String or string of arrays to exclude.
+     * @param message   Message to display on error.
+     */
+    deepEqualExcluding<T>(actual: T[], expected: T[], props: string | string[], message?: string): void;
 
     /**
      * Asserts that actual is deeply equal to expected excluding properties any level deep.
      *
-     * @type T          Type of the objects.
      * @param actual    Actual value.
      * @param expected  Potential expected value.
      * @param props     Properties or keys to exclude.
      * @param message   Message to display on error.
      */
-    deepEqualExcludingEvery<T>(actual: T, expected: T, props: keyof T | keyof T[], message?: string): void;
+    deepEqualExcludingEvery<T>(actual: T, expected: T, props: keyof T | (keyof T)[], message?: string): void;
+
+    /**
+     * Asserts that actual array is deeply equal to expected array excluding properties any level deep.
+     *
+     * @param actual    Any array.
+     * @param expected  Expected array.
+     * @param props     String or string of arrays to exclude.
+     * @param message   Message to display on error.
+     */
+    deepEqualExcludingEvery<T>(actual: T[], expected: T[], props: string | string[], message?: string): void;
   }
 }
