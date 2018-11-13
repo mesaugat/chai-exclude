@@ -9,7 +9,7 @@
   "homepage": "https://github.com/mesaugat/chai-exclude",
   "scripts": {
     "test": "mocha",
-    "lint": "standard lib test --fix"
+    "lint": "standard --fix"
   },
   "keywords": [
     "chai",
