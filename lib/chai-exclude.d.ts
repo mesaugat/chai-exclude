@@ -14,13 +14,13 @@ declare namespace Chai {
 
   interface Assert {
     /**
-      * Asserts that actual is deeply equal to expected excluding some top level properties.
-      *
-      * @param actual    Actual value.
-      * @param expected  Potential expected value.
-      * @param props     Properties or keys to exclude.
-      * @param message   Message to display on error.
-      */
+     * Asserts that actual is deeply equal to expected excluding some top level properties.
+     *
+     * @param actual    Actual value.
+     * @param expected  Potential expected value.
+     * @param props     Properties or keys to exclude.
+     * @param message   Message to display on error.
+     */
     deepEqualExcluding<T>(actual: T | T[], expected: T | T[], props: keyof T | (keyof T)[], message?: string): void;
 
     /**
