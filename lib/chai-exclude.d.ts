@@ -22,7 +22,7 @@ declare namespace Chai {
      * @param props     Properties or keys to exclude.
      * @param message   Message to display on error.
      */
-    deepEqualExcluding<T>(actual: T, expected: T, props: string | string[], message?: string): void;
+    deepEqualExcluding<T>(actual: T, expected: T, props: keyof T | keyof T[], message?: string): void;
 
     /**
      * Asserts that actual is deeply equal to expected excluding properties any level deep.
@@ -33,6 +33,6 @@ declare namespace Chai {
      * @param props     Properties or keys to exclude.
      * @param message   Message to display on error.
      */
-    deepEqualExcludingEvery<T>(actual: T, expected: T, props: string | string[], message?: string): void;
+    deepEqualExcludingEvery<T>(actual: T, expected: T, props: keyof T | keyof T[], message?: string): void;
   }
 }
