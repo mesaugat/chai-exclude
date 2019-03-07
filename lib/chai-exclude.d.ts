@@ -3,7 +3,7 @@
 declare module "chai-exclude" {
   function chaiExclude(chai: any, utils: any): void;
 
-  export = chaiExclude;
+  export default chaiExclude;
 }
 
 declare namespace Chai {
