@@ -49,7 +49,7 @@ use(chaiExclude);
 
 ```js
 import { use } from 'chai';
-import chaiExclude = require('chai-exclude');
+import chaiExclude from 'chai-exclude';
 
 use(chaiExclude);
 
