@@ -1,9 +1,7 @@
-/// <reference types="chai" />
+/// <reference types="@types/chai" />
 
-declare module "chai-exclude" {
-  function chaiExclude(chai: any, utils: any): void;
-
-  export default chaiExclude;
+declare module 'chai-exclude' {
+  export default function chaiExclude(chai: any, utils: any): void;
 }
 
 declare namespace Chai {
