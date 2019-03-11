@@ -39,19 +39,19 @@ chai.use(chaiExclude);
 ### ES6 Import
 
 ```js
-import { use } from 'chai';
+import chai from 'chai';
 import chaiExclude from 'chai-exclude';
 
-use(chaiExclude);
+chai.use(chaiExclude);
 ```
 
 ### TypeScript
 
 ```js
-import { use } from 'chai';
+import * as chai from 'chai';
 import chaiExclude from 'chai-exclude';
 
-use(chaiExclude);
+chai.use(chaiExclude);
 
 // The typings for chai-exclude are included with the package itself.
 ```
