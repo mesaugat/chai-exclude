@@ -1,6 +1,6 @@
 const fclone = require('fclone')
 
-function chaiExclude(chai, utils) {
+function chaiExclude (chai, utils) {
   const assert = chai.assert
   const Assertion = chai.Assertion
 
@@ -122,8 +122,8 @@ function chaiExclude(chai, utils) {
       }
 
       // In case of 'use strict' and babelified code
-      arguments[0] = val;
-      
+      arguments[0] = val
+
       _super.apply(this, arguments)
     }
   }
