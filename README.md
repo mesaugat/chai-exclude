@@ -58,7 +58,7 @@ chai.use(chaiExclude);
 
 ## Examples
 
-All these examples are for JavaScript. If you are using TypeScript and `assert`, you'll need to deal with strict types. Take a look at the [type definition](lib/chai-exclude.d.ts).
+All these examples are for JavaScript. If you are using TypeScript and `assert`, you'll need to deal with strict types. Take a look at the [type definition](index.d.ts).
 
 ### a) excluding
 
