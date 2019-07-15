@@ -6,9 +6,9 @@ import * as chaiExclude from './chai-exclude'
 
 chai.use(chaiExclude)
 
-// BDD API (expect)
 const object = { str: 'a', num: 1 }
 
+// BDD API (expect)
 expectType<Chai.Assertion>(chai.expect(object).excluding('str'))
 expectType<Chai.Assertion>(chai.expect(object).excluding(['str', 'num']))
 expectType<Chai.Assertion>(chai.expect(object).excludingEvery('str'))
