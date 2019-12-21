@@ -1,5 +1,5 @@
 import * as chai from 'chai'
-import { expectType } from 'tsd-check';
+import { expectType } from 'tsd';
 
 import '.'
 import * as chaiExclude from './chai-exclude'
