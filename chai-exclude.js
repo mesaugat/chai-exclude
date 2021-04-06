@@ -197,6 +197,8 @@ function chaiExclude (chai, utils) {
   })
 
   Assertion.overwriteMethod('eq', assertEqual)
+  Assertion.overwriteMethod('eql', assertEqual)
+  Assertion.overwriteMethod('eqls', assertEqual)
   Assertion.overwriteMethod('equal', assertEqual)
   Assertion.overwriteMethod('equals', assertEqual)
 }

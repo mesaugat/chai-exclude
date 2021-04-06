@@ -229,6 +229,11 @@ describe('chai-exclude', () => {
       expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.equal({ b: 'b', c: 'c' })
     })
 
+    it('should exclude a key from the object and eql/eqls alias is used', () => {
+      expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.eql({ b: 'b', c: 'c' })
+      expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.eqls({ b: 'b', c: 'c' })
+    })
+
     it('should also exclude a key from the other object', () => {
       expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.equal({ a: 'z', b: 'b', c: 'c' })
     })
@@ -618,6 +623,13 @@ describe('chai-exclude', () => {
     it('should exclude nothing from the object if no matching keys are provided', () => {
       expect(initialObj).excludingEvery('x').to.deep.equal(initialObj)
       expect(initialObj).excludingEvery(['x', 'y']).to.deep.equal(initialObj)
+    })
+
+    // chai-exclude did not work with eql/eqls alias as reported by @luigidt
+    // @see https://github.com/mesaugat/chai-exclude/issues/30
+    it('should exclude nothing from the object if no matching keys are provided and eql/eqls is used', () => {
+      expect({ a: new Date(0) }).excludingEvery('b').to.be.eql({ a: new Date(0) })
+      expect({ a: new Date(0) }).excludingEvery(['b', 'c']).to.be.eqls({ a: new Date(0) })
     })
   })
 })
