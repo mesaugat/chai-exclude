@@ -118,7 +118,7 @@ describe('chai-exclude', () => {
       assert.deepEqualExcludingEvery(initialObj, expectedObj2, ['a', 'b'])
     })
 
-    it('should exclude key(s) in case of circular reference from comparison', () => {
+    it('should exclude circular reference key(s) from comparison', () => {
       const initialObj = {
         a: 'a',
         b: 'b',
@@ -310,7 +310,7 @@ describe('chai-exclude', () => {
       expect(initialArray).excluding('c').to.deep.equal(expectedArray)
     })
 
-    it('should exclude a key from the object with circular key(s)', () => {
+    it('should exclude circular reference key(s) from comparison', () => {
       const initialObj = {
         a: 'a',
         b: 'b',
@@ -594,7 +594,7 @@ describe('chai-exclude', () => {
       expect(initialArray).excludingEvery(['a', 'd']).to.deep.equal(expectedArray2)
     })
 
-    it('should exclude keys from the object with circular reference', () => {
+    it('should exclude circular reference key(s) from comparison', () => {
       const initialObj = {
         a: 'a',
         b: 'b',
