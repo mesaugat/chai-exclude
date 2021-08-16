@@ -124,7 +124,7 @@ function chaiExclude (chai, utils) {
       // In case of 'use strict' and babelified code
       arguments[0] = val
 
-      _super.apply(this, arguments)
+      return _super.apply(this, arguments)
     }
   }
 
