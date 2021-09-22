@@ -4,6 +4,7 @@ import { expectType } from 'tsd';
 import '.'
 import * as chaiExclude from './chai-exclude'
 
+// @ts-ignore
 chai.use(chaiExclude)
 
 const object = { str: 'a', num: 1 }

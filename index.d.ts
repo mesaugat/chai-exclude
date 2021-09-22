@@ -1,7 +1,7 @@
 /// <reference types="@types/chai" />
 
 declare module 'chai-exclude' {
-  export default function chaiExclude(chai: any, utils: any): void;
+  export default function chaiExclude(chai: Chai.ChaiStatic, utils: Chai.ChaiUtils): void;
 }
 
 declare namespace Chai {
