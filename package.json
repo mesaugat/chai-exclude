@@ -1,6 +1,6 @@
 {
   "name": "chai-exclude",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Exclude keys to compare from a deep equal operation with chai expect and assert",
   "main": "chai-exclude.js",
   "types": "index.d.ts",
