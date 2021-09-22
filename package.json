@@ -32,11 +32,11 @@
     "url": "https://github.com/mesaugat/chai-exclude/issues"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.2",
-    "chai": "^4.1.2",
-    "mocha": "^7.1.2",
-    "standard": "^14.3.1",
-    "tsd": "^0.13.1"
+    "@types/chai": "^4.2.22",
+    "chai": "^4.3.4",
+    "mocha": "^9.1.1",
+    "standard": "^16.0.3",
+    "tsd": "^0.17.0"
   },
   "dependencies": {
     "fclone": "^1.0.11"
