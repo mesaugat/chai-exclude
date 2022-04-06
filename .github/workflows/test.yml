@@ -1,4 +1,4 @@
-name: Build
+name: Test
 on:
   pull_request:
     branches:
@@ -26,4 +26,3 @@ jobs:
           cache: 'yarn'
       - run: yarn
       - run: yarn test
-      - run: yarn codecov
