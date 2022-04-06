@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/chai-exclude.svg)](https://www.npmjs.com/package/chai-exclude)
 [![npm](https://img.shields.io/npm/dw/chai-exclude.svg)](https://www.npmjs.com/package/chai-exclude)
-[![Build Status](https://travis-ci.org/mesaugat/chai-exclude.svg?branch=master)](https://travis-ci.org/mesaugat/chai-exclude)
+[![CI Status](https://github.com/mesaugat/chai-exclude/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/mesaugat/chai-exclude/actions/workflows/test.yml)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 Exclude keys to compare from a deep equal operation with chai [expect](http://chaijs.com/api/bdd/) or [assert](http://chaijs.com/api/assert/).
