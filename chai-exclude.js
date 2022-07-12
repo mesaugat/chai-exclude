@@ -25,22 +25,38 @@ function chaiExclude (chai, utils) {
   }
 
   /**
+   * When props contain nested keys, remove key from beginning
+   * 
+   * @param {Array<string|number>} props array of keys to remove
+   * @param {string|number}        key   key to remove from beginning of nested keys
+   */
+   function enterKeyInProps(props, key) {
+    const stringKey = String(key);
+    return props.map(prop => {
+      return String(prop).startsWith(stringKey + '.')
+        ? prop.substring(stringKey.length + 1)
+        : prop;
+    });
+  }
+
+  /**
    * Remove keys from an object or an array.
    *
    * @param   {Object|Array}  val       object or array to remove keys
    * @param   {Array}         props     array of keys to remove
    * @param   {Boolean}       recursive true if property needs to be removed recursively
+   * @param   {Boolean}       nested    true if property can be nested
    * @returns {Object}
    */
-  function removeKeysFrom (val, props, recursive = false) {
+  function removeKeysFrom (val, props, recursive = false, nested = false) {
     // Replace circular values with '[Circular]'
     const obj = fclone(val)
 
     if (isObject(obj)) {
-      return removeKeysFromObject(obj, props, recursive)
+      return removeKeysFromObject(obj, props, recursive, nested)
     }
 
-    return removeKeysFromArray(obj, props, recursive)
+    return removeKeysFromArray(obj, props, recursive, nested)
   }
 
   /**
@@ -49,9 +65,10 @@ function chaiExclude (chai, utils) {
    * @param   {Object}  obj       object to remove keys
    * @param   {Array}   props     array of keys to remove
    * @param   {Boolean} recursive true if property needs to be removed recursively
+   * @param   {Boolean} nested    true if property can be nested
    * @returns {Object}
    */
-  function removeKeysFromObject (obj, props, recursive = false) {
+  function removeKeysFromObject (obj, props, recursive = false, nested = false) {
     const res = {}
     const keys = Object.keys(obj)
     const isRecursive = !!recursive
@@ -60,13 +77,14 @@ function chaiExclude (chai, utils) {
       const key = keys[i]
       const val = obj[key]
 
-      const hasKey = props.indexOf(key) === -1
+      const keepKey = props.indexOf(key) === -1
+      const nextProps = nested ? enterKeyInProps(props, key) : props;
 
-      if (isRecursive && hasKey && isObject(val)) {
-        res[key] = removeKeysFromObject(val, props, true)
-      } else if (isRecursive && hasKey && isArray(val)) {
-        res[key] = removeKeysFromArray(val, props, true)
-      } else if (hasKey) {
+      if ((isRecursive || nested) && keepKey && isObject(val)) {
+        res[key] = removeKeysFromObject(val, nextProps, recursive, nested)
+      } else if ((isRecursive || nested) && keepKey && isArray(val)) {
+        res[key] = removeKeysFromArray(val, nextProps, recursive, nested)
+      } else if (keepKey) {
         res[key] = val
       }
     }
@@ -82,7 +100,7 @@ function chaiExclude (chai, utils) {
    * @param   {Boolean} recursive true if property needs to be removed recursively
    * @returns {Array}
    */
-  function removeKeysFromArray (array, props, recursive = false) {
+  function removeKeysFromArray (array, props, recursive = false, nested = false) {
     const res = []
     let val = {}
 
@@ -91,15 +109,20 @@ function chaiExclude (chai, utils) {
     }
 
     for (let i = 0; i < array.length; i++) {
+      const keepKey = props.indexOf(String(i)) === -1
+      const nextProps = nested ? enterKeyInProps(props, i) : props;
+
       if (isObject(array[i])) {
-        val = removeKeysFromObject(array[i], props, recursive)
+        val = removeKeysFromObject(array[i], nextProps, recursive, nested)
       } else if (isArray(array[i])) {
-        val = removeKeysFromArray(array[i], props, recursive)
+        val = removeKeysFromArray(array[i], nextProps, recursive, nested)
       } else {
         val = array[i]
       }
 
-      res.push(val)
+      if (keepKey) {
+        res.push(val)
+      }
     }
 
     return res
@@ -140,6 +163,13 @@ function chaiExclude (chai, utils) {
    */
   utils.addMethod(assert, 'deepEqualExcludingEvery', function (actual, expected, props, message) {
     new Assertion(actual, message).excludingEvery(props).to.deep.equal(expected)
+  })
+
+  /**
+   * Add a new method `deepEqualExcludingNested` to 'chai.assert'.
+   */
+   utils.addMethod(assert, 'deepEqualExcludingNested', function (actual, expected, props, message) {
+    new Assertion(actual, message).excludingNested(props).to.deep.equal(expected)
   })
 
   /**
@@ -191,6 +221,33 @@ function chaiExclude (chai, utils) {
     }
 
     this._obj = removeKeysFrom(obj, props, true)
+
+    utils.flag(this, 'excludingEvery', true)
+    utils.flag(this, 'excludingProps', props)
+  })
+
+  /**
+   * Add a new method 'excludingNested' to the assertion library.
+   */
+   Assertion.addMethod('excludingNested', function (props) {
+    utils.expectTypes(this, ['object', 'array'])
+
+    const obj = this._obj
+
+    // If exclude parameter is not provided
+    if (!props) {
+      return this
+    }
+
+    if (typeof props === 'string') {
+      props = [props]
+    }
+
+    if (!isArray(props)) {
+      throw new Error('Excluding params should be either a string or an array')
+    }
+
+    this._obj = removeKeysFrom(obj, props, false, true)
 
     utils.flag(this, 'excludingEvery', true)
     utils.flag(this, 'excludingProps', props)

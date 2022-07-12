@@ -8,6 +8,7 @@ declare namespace Chai {
   interface Assertion extends LanguageChains, NumericComparison, TypeComparison {
     excluding(props: string | string[]): Assertion;
     excludingEvery(props: string | string[]): Assertion;
+    excludingNested(props: string | string[]): Assertion;
   }
 
   interface Assert {
@@ -30,5 +31,15 @@ declare namespace Chai {
      * @param message   Message to display on error.
      */
     deepEqualExcludingEvery<T>(actual: T | T[], expected: T | T[], props: keyof T | (keyof T)[], message?: string): void;
+
+    /**
+     * Asserts that actual is deeply equal to expected excluding nested properties.
+     *
+     * @param actual    Actual value.
+     * @param expected  Expected value.
+     * @param props     Properties or keys to exclude.
+     * @param message   Message to display on error.
+     */
+     deepEqualExcludingNested<T>(actual: T | T[], expected: T | T[], props: string | (string)[], message?: string): void;
   }
 }
