@@ -19,6 +19,17 @@ describe('chai-exclude', () => {
   })
 
   /**
+   * Uses the same 'excluding' Assertion API underneath, thus the fewer amount of tests.
+   */
+   describe('assert.deepEqualExcludingNested', () => {
+    it('should exclude key(s) from comparison', () => {
+      assert.deepEqualExcludingNested({ a: { a1: 'a1', a2: 'a2' }, b: 'b', c: 'c' }, { a: { a2: 'a2' }, b: 'b', c: 'c' }, 'a.a1')
+      assert.deepEqualExcludingNested({ a: { a1: 'a1', a2: 'a2' }, b: 'b', c: 'c' }, { a: { a2: 'a2' }, c: 'c' }, ['a.a1', 'b'])
+      assert.deepEqualExcludingNested([{ a: { a1: 'a1', a2: 'a2' }, b: 'b', c: 'c' }], [{ a: { a2: 'a2' }, c: 'c' }], ['a.a1', 'b'])
+    })
+   })
+
+  /**
    * Uses the same 'excludingEvery' Assertion API underneath, thus the fewer amount of tests.
    */
   describe('assert.deepEqualExcludingEvery', () => {
@@ -630,6 +641,90 @@ describe('chai-exclude', () => {
     it('should exclude nothing from the object if no matching keys are provided and eql/eqls is used', () => {
       expect({ a: new Date(0) }).excludingEvery('b').to.be.eql({ a: new Date(0) })
       expect({ a: new Date(0) }).excludingEvery(['b', 'c']).to.be.eqls({ a: new Date(0) })
+    })
+  })
+
+  describe('expect.excludingNested', () => {
+    const initialObj = {
+      a: 'a',
+      b: {
+        b1: 'b1',
+        b2: {
+          b21: 'b21',
+          b22: 'b22',
+        },
+      },
+      c: [ 0, 1, { cX: 'cX' }],
+    }
+
+    it('should exclude nothing if no key is provided', () => {
+      expect(initialObj).excludingNested().to.deep.equal(initialObj)
+    })
+
+    it('should exclude single non-nested key when provided', () => {
+      expect(initialObj).excludingNested('a').to.deep.equal({
+        b: {
+          b1: 'b1',
+          b2: {
+            b21: 'b21',
+            b22: 'b22',
+          },
+        },
+        c: [ 0, 1, { cX: 'cX' }],
+      })
+    })
+
+    it('should exclude single nested key when provided', () => {
+      expect(initialObj).excludingNested('b.b1').to.deep.equal({
+        a: 'a',
+        b: {
+          b2: {
+            b21: 'b21',
+            b22: 'b22',
+          },
+        },
+        c: [ 0, 1, { cX: 'cX' }],
+      })
+    })
+
+    it('should exclude multiple nested keys when provided', () => {
+      expect(initialObj).excludingNested(['b.b1', 'b.b2.b22']).to.deep.equal({
+        a: 'a',
+        b: {
+          b2: {
+            b21: 'b21',
+          },
+        },
+        c: [ 0, 1, { cX: 'cX' }],
+      })
+    })
+
+    it('should exclude nested key from array', () => {
+      expect(initialObj).excludingNested('c.0').to.deep.equal({
+        a: 'a',
+        b: {
+          b1: 'b1',
+          b2: {
+            b21: 'b21',
+            b22: 'b22',
+          },
+        },
+        c: [ 1, { cX: 'cX' }],
+      })
+    })
+
+    it('should exclude multiple nested keys from array', () => {
+      expect(initialObj).excludingNested(['c.0', 'c.2.cX']).to.deep.equal({
+        a: 'a',
+        b: {
+          b1: 'b1',
+          b2: {
+            b21: 'b21',
+            b22: 'b22',
+          },
+        },
+        c: [ 1, { }],
+      })
     })
   })
 })
