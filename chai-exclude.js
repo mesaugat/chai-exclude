@@ -53,20 +53,15 @@ function chaiExclude (chai, utils) {
    */
   function removeKeysFromObject (obj, props, recursive = false) {
     const res = {}
-    const keys = Object.keys(obj)
-    const isRecursive = !!recursive
 
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i]
-      const val = obj[key]
+    for (const [key, val] of Object.entries(obj)) {
+      if (props.includes(key)) continue
 
-      const hasKey = props.indexOf(key) === -1
-
-      if (isRecursive && hasKey && isObject(val)) {
+      if (recursive && isObject(val)) {
         res[key] = removeKeysFromObject(val, props, true)
-      } else if (isRecursive && hasKey && isArray(val)) {
+      } else if (recursive && isArray(val)) {
         res[key] = removeKeysFromArray(val, props, true)
-      } else if (hasKey) {
+      } else {
         res[key] = val
       }
     }
