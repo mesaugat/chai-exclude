@@ -209,10 +209,10 @@ function chaiExclude (chai, utils) {
   Assertion.overwriteMethod('equal', removeKeysAndAssert)
   Assertion.overwriteMethod('equals', removeKeysAndAssert)
 
-  Assertion.addChainableMethod('include', removeKeysAndAssert, keepChainingBehavior)
-  Assertion.addChainableMethod('contain', removeKeysAndAssert, keepChainingBehavior)
-  Assertion.addChainableMethod('contains', removeKeysAndAssert, keepChainingBehavior)
-  Assertion.addChainableMethod('includes', removeKeysAndAssert, keepChainingBehavior)
+  Assertion.overwriteChainableMethod('include', removeKeysAndAssert, keepChainingBehavior)
+  Assertion.overwriteChainableMethod('contain', removeKeysAndAssert, keepChainingBehavior)
+  Assertion.overwriteChainableMethod('contains', removeKeysAndAssert, keepChainingBehavior)
+  Assertion.overwriteChainableMethod('includes', removeKeysAndAssert, keepChainingBehavior)
 }
 
 module.exports = chaiExclude
