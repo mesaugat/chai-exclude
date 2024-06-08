@@ -101,12 +101,12 @@ function chaiExclude (chai, utils) {
   }
 
   /**
-   * Override standard assertEqual method to remove the keys from other part of the equation.
+   * Override standard assertion logic method to remove the keys from other part of the equation.
    *
    * @param   {Object}    _super
    * @returns {Function}
    */
-  function assertEqual (_super) {
+  function removeKeysAndAssert (_super) {
     return function (val) {
       const props = utils.flag(this, 'excludingProps')
 
@@ -120,6 +120,18 @@ function chaiExclude (chai, utils) {
       arguments[0] = val
 
       return _super.apply(this, arguments)
+    }
+  }
+
+  /**
+   * Keep standard chaining logic.
+   *
+   * @param   {Object}    _super
+   * @returns {Function}
+   */
+  function keepChainingBehavior (_super) {
+    return function () {
+      _super.apply(this, arguments)
     }
   }
 
@@ -191,11 +203,16 @@ function chaiExclude (chai, utils) {
     utils.flag(this, 'excludingProps', props)
   })
 
-  Assertion.overwriteMethod('eq', assertEqual)
-  Assertion.overwriteMethod('eql', assertEqual)
-  Assertion.overwriteMethod('eqls', assertEqual)
-  Assertion.overwriteMethod('equal', assertEqual)
-  Assertion.overwriteMethod('equals', assertEqual)
+  Assertion.overwriteMethod('eq', removeKeysAndAssert)
+  Assertion.overwriteMethod('eql', removeKeysAndAssert)
+  Assertion.overwriteMethod('eqls', removeKeysAndAssert)
+  Assertion.overwriteMethod('equal', removeKeysAndAssert)
+  Assertion.overwriteMethod('equals', removeKeysAndAssert)
+
+  Assertion.overwriteChainableMethod('include', removeKeysAndAssert, keepChainingBehavior)
+  Assertion.overwriteChainableMethod('contain', removeKeysAndAssert, keepChainingBehavior)
+  Assertion.overwriteChainableMethod('contains', removeKeysAndAssert, keepChainingBehavior)
+  Assertion.overwriteChainableMethod('includes', removeKeysAndAssert, keepChainingBehavior)
 }
 
 module.exports = chaiExclude

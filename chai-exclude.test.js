@@ -236,6 +236,11 @@ describe('chai-exclude', () => {
 
     it('should also exclude a key from the other object', () => {
       expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.equal({ a: 'z', b: 'b', c: 'c' })
+      expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.include({ a: 'z', b: 'b', c: 'c' })
+    })
+
+    it('should also exclude a key from the other object and contain alias is used', () => {
+      expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.contain({ a: 'z', b: 'b', c: 'c' })
     })
 
     it('should exclude an array of keys from the object', () => {
@@ -327,6 +332,7 @@ describe('chai-exclude', () => {
       expectedObj.e = expectedObj
 
       expect(initialObj).excluding('a').to.deep.equal(expectedObj)
+      expect(initialObj).excluding('a').to.deep.include(expectedObj)
     })
   })
 
@@ -368,6 +374,7 @@ describe('chai-exclude', () => {
       }
 
       expect(initialObj).excludingEvery('a').to.deep.equal(expectedObj)
+      expect(initialObj).excludingEvery('a').to.deep.include(expectedObj)
     })
 
     it('should exclude a key from multiple levels of a given object when value is not an object', () => {
