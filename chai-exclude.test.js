@@ -236,11 +236,16 @@ describe('chai-exclude', () => {
 
     it('should also exclude a key from the other object', () => {
       expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.equal({ a: 'z', b: 'b', c: 'c' })
-      expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.include({ a: 'z', b: 'b', c: 'c' })
     })
 
-    it('should also exclude a key from the other object and contain alias is used', () => {
-      expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.deep.contain({ a: 'z', b: 'b', c: 'c' })
+    it('should also exclude a key from the other object and include(s) is used', () => {
+      expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.include({ a: 'z', b: 'b', c: 'c' })
+      expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.includes({ a: 'z', b: 'b', c: 'c' })
+    })
+
+    it('should also exclude a key from the other object and contain(s) is used', () => {
+      expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.contain({ a: 'z', b: 'b', c: 'c' })
+      expect({ a: 'a', b: 'b', c: 'c' }).excluding('a').to.contains({ a: 'z', b: 'b', c: 'c' })
     })
 
     it('should exclude an array of keys from the object', () => {
