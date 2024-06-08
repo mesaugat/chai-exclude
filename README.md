@@ -11,8 +11,6 @@ Exclude keys to compare from a deep equal operation with chai [expect](http://ch
 
 Sometimes you'll need to exclude object properties that generate unique values while doing a deep equal operation. This plugin makes it easier to remove those properties from comparison.
 
-https://github.com/chaijs/chai/issues/885
-
 Works with both objects and array of objects with or without circular references.
 
 ## Installation
