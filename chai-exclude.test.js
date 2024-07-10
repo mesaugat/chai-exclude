@@ -1,8 +1,6 @@
 /* eslint-env mocha */
-
-const { use, assert, expect } = require('chai')
-
-const chaiExclude = require('./chai-exclude')
+import { use, assert, expect } from 'chai'
+import chaiExclude from './chai-exclude.js'
 
 use(chaiExclude)
 
