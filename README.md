@@ -9,40 +9,37 @@ Exclude keys to compare from a deep equal operation with chai [expect](http://ch
 
 ## Why?
 
-Sometimes you'll need to exclude object properties that generate unique values while doing a deep equal operation. This plugin makes it easier to remove those properties from comparison.
+Sometimes you'll need to exclude object properties that generate unique values while doing an assertion. This plugin makes it easier to remove those properties from comparison.
 
 Works with both objects and array of objects with or without circular references.
 
 ## Installation
 
+`chai-exclude` is an ESM package targeting Chai v5 and above.
+
 ```bash
 npm install chai-exclude --save-dev
 ```
 
-```bash
-yarn add chai-exclude --dev
+If you are using Chai v4, you can use the CommonJS version of the package.
+
+```
+npm install chai-exclude@2.1.1 --save-dev
 ```
 
-## Usage
+```bash
 
-### ES6 Import
+```bash
+
+## Usage
 
 ```js
 import chai from 'chai';
 import chaiExclude from 'chai-exclude';
 
 chai.use(chaiExclude);
-```
 
-### TypeScript
-
-```js
-import * as chai from 'chai';
-import chaiExclude from 'chai-exclude';
-
-chai.use(chaiExclude);
-
-// The typings for chai-exclude are included with the package itself.
+// If you are using TypeScript, the typings for chai-exclude are included with the package itself.
 ```
 
 ## Examples
