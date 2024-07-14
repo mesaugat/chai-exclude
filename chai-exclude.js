@@ -1,5 +1,8 @@
 import fclone from 'fclone'
 
+/**
+ * Chai plugin to exclude keys from comparison.
+ */
 function chaiExclude (chai, utils) {
   const assert = chai.assert
   const Assertion = chai.Assertion

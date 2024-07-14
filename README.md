@@ -23,13 +23,9 @@ npm install chai-exclude --save-dev
 
 If you are using Chai v4, you can use the CommonJS version of the package.
 
-```
+```bash
 npm install chai-exclude@2.1.1 --save-dev
 ```
-
-```bash
-
-```bash
 
 ## Usage
 
