@@ -215,5 +215,4 @@ function chaiExclude (chai, utils) {
   Assertion.overwriteChainableMethod('includes', removeKeysAndAssert, keepChainingBehavior)
 }
 
-const _default = chaiExclude // for Typescript
-export default _default
+export default chaiExclude
