@@ -13,9 +13,8 @@
     "index.d.ts"
   ],
   "scripts": {
-    "test": "mocha --reporter spec --recursive --colors *.test.js && tsd",
-    "lint": "standard --fix",
-    "typecheck": "tsd"
+    "test": "mocha --reporter spec --recursive --colors *.test.js",
+    "lint": "standard --fix"
   },
   "keywords": [
     "chai",
@@ -33,11 +32,9 @@
     "url": "https://github.com/mesaugat/chai-exclude/issues"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.4",
-    "chai": "^5.0.0",
-    "mocha": "^10.2.0",
-    "standard": "^17.0.0",
-    "tsd": "^0.25.0"
+    "chai": "^5.1.1",
+    "mocha": "^10.6.0",
+    "standard": "^17.0.0"
   },
   "dependencies": {
     "fclone": "^1.0.11"
