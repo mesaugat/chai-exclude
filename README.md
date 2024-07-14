@@ -25,15 +25,6 @@ yarn add chai-exclude --dev
 
 ## Usage
 
-### Require
-
-```js
-const chai = require('chai');
-const chaiExclude = require('chai-exclude');
-
-chai.use(chaiExclude);
-```
-
 ### ES6 Import
 
 ```js

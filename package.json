@@ -7,6 +7,7 @@
   "author": "Saugat Acharya <mesaugat@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/mesaugat/chai-exclude",
+  "type": "module",
   "files": [
     "chai-exclude.js",
     "index.d.ts"
@@ -33,7 +34,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",
-    "chai": "^4.3.7",
+    "chai": "^5.0.0",
     "mocha": "^10.2.0",
     "standard": "^17.0.0",
     "tsd": "^0.25.0"
@@ -42,6 +43,6 @@
     "fclone": "^1.0.11"
   },
   "peerDependencies": {
-    "chai": ">= 4.0.0 < 5"
+    "chai": ">= 5"
   }
 }

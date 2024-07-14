@@ -1,4 +1,4 @@
-const fclone = require('fclone')
+import fclone from 'fclone'
 
 function chaiExclude (chai, utils) {
   const assert = chai.assert
@@ -215,5 +215,5 @@ function chaiExclude (chai, utils) {
   Assertion.overwriteChainableMethod('includes', removeKeysAndAssert, keepChainingBehavior)
 }
 
-module.exports = chaiExclude
-module.exports.default = chaiExclude // for Typescript
+const _default = chaiExclude // for Typescript
+export default _default
