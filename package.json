@@ -3,14 +3,14 @@
   "version": "2.1.1",
   "description": "Exclude keys to compare from a deep equal operation with chai expect and assert",
   "main": "chai-exclude.js",
-  "types": "index.d.ts",
+  "types": "chai-exclude.d.ts",
   "author": "Saugat Acharya <mesaugat@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/mesaugat/chai-exclude",
   "type": "module",
   "files": [
     "chai-exclude.js",
-    "index.d.ts"
+    "chai-exclude.d.ts"
   ],
   "scripts": {
     "test": "mocha --reporter spec --recursive --colors *.test.js",
