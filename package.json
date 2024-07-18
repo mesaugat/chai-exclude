@@ -1,13 +1,13 @@
 {
   "name": "chai-exclude",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "Exclude keys to compare from a deep equal operation with chai expect and assert",
+  "type": "module",
   "main": "chai-exclude.js",
   "types": "chai-exclude.d.ts",
   "author": "Saugat Acharya <mesaugat@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/mesaugat/chai-exclude",
-  "type": "module",
   "files": [
     "chai-exclude.js",
     "chai-exclude.d.ts"
