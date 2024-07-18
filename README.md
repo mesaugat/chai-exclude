@@ -30,12 +30,11 @@ npm install chai-exclude@2.1.1 --save-dev
 ## Usage
 
 ```js
-import chai from 'chai';
-import chaiExclude from 'chai-exclude';
+import { use } from 'chai'
+import chaiExclude from 'chai-exclude'
 
-chai.use(chaiExclude);
-
-// If you are using TypeScript, the typings for chai-exclude are included with the package itself.
+// If you are using TypeScript, the typings for chai-exclude are included in the package
+use(chaiExclude)
 ```
 
 ## Examples
