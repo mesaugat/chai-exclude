@@ -641,5 +641,11 @@ describe('chai-exclude', () => {
       expect({ a: new Date(0) }).excludingEvery('b').to.be.eql({ a: new Date(0) })
       expect({ a: new Date(0) }).excludingEvery(['b', 'c']).to.be.eqls({ a: new Date(0) })
     })
+
+    it('should not exclude all date if excluding every is used', () => {
+      expect({ a: { b: new Date("2025-03-21T10:19:01.502Z"), c: new Date() }}).excludingEvery('c').to.not.deep.eq({ a: { b: new Date("2025-03-21T10:19:00.502Z"), c: new Date() }})
+      expect({ a: { b: new Date("2025-03-21T10:19:00.502Z"), c: new Date() }}).excludingEvery('c').to.deep.eq({ a: { b: new Date("2025-03-21T10:19:00.502Z"), c: new Date() }})
+      expect({ a: [{ b: new Date("2025-03-21T10:19:00.502Z"), c: new Date() }]}).excludingEvery('c').to.deep.eq({ a: [{ b: new Date("2025-03-21T10:19:00.502Z"), c: new Date() }]})
+    })
   })
 })

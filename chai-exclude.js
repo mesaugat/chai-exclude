@@ -24,7 +24,8 @@ function chaiExclude (chai, utils) {
    * @returns {Boolean}
    */
   function isObject (arg) {
-    return arg === Object(arg) && Object.prototype.toString.call(arg) !== '[object Array]'
+    const objectType = Object.prototype.toString.call(arg)
+    return arg === Object(arg) && objectType !== '[object Array]' && objectType !== '[object Date]'
   }
 
   /**
