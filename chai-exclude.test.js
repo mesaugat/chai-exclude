@@ -14,6 +14,11 @@ describe('chai-exclude', () => {
       assert.deepEqualExcluding({ a: 'a', b: 'b', c: 'c' }, { c: 'c' }, ['a', 'b'])
       assert.deepEqualExcluding([{ a: 'a', b: 'b', c: 'c' }], [{ c: 'c' }], ['a', 'b'])
     })
+
+    it('should work with date objects', () => {
+      assert.deepEqualExcluding({ date: new Date(), age: 10 }, { age: 10 }, ['date'])
+      assert.deepEqualExcluding({ date: new Date('1970-01-01T00:00:00.000Z'), age: 10 }, { date: new Date('1970-01-01T00:00:00.000Z') }, ['age'])
+    })
   })
 
   /**
@@ -337,6 +342,11 @@ describe('chai-exclude', () => {
       expect(initialObj).excluding('a').to.deep.equal(expectedObj)
       expect(initialObj).excluding('a').to.deep.include(expectedObj)
     })
+
+    it('should exclude date objects from comparison', () => {
+      expect({ a: { b: new Date('2025-03-21T10:19:01.502Z') }, c: new Date() }).excluding('c').to.deep.eq({ a: { b: new Date('2025-03-21T10:19:01.502Z') }, c: new Date() })
+      expect({ a: [{ b: new Date('2025-03-21T10:19:01.502Z'), c: new Date('2025-04-04T10:19:01.502Z') }] }).excluding('c').to.deep.eq({ a: [{ b: new Date('2025-03-21T10:19:01.502Z'), c: new Date('2025-04-04T10:19:01.502Z') }] })
+    })
   })
 
   describe('expect.excludingEvery', () => {
@@ -640,6 +650,15 @@ describe('chai-exclude', () => {
     it('should exclude nothing from the object if no matching keys are provided and eql/eqls is used', () => {
       expect({ a: new Date(0) }).excludingEvery('b').to.be.eql({ a: new Date(0) })
       expect({ a: new Date(0) }).excludingEvery(['b', 'c']).to.be.eqls({ a: new Date(0) })
+    })
+
+    // chai-exclude did not work properly with date objects as reported by @ThomasDenoncin and @thfontaine
+    // @see https://github.com/mesaugat/chai-exclude/issues/54
+    // @see https://github.com/mesaugat/chai-exclude/pull/55
+    it('should exclude date objects from comparison', () => {
+      expect({ a: { b: new Date('2025-03-21T10:19:01.502Z'), c: new Date() } }).excludingEvery('c').to.not.deep.eq({ a: { b: new Date('2025-03-21T10:19:00.502Z'), c: new Date() } })
+      expect({ a: { b: new Date('2025-03-21T10:19:01.502Z'), c: new Date() } }).excludingEvery('c').to.deep.eq({ a: { b: new Date('2025-03-21T10:19:01.502Z'), c: new Date() } })
+      expect({ a: [{ b: new Date('2025-03-21T10:19:01.502Z'), c: new Date() }] }).excludingEvery('c').to.deep.eq({ a: [{ b: new Date('2025-03-21T10:19:01.502Z'), c: new Date() }] })
     })
   })
 })
